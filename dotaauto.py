@@ -7,7 +7,8 @@ import os
 
 BUTTON_ACCEPT = "accept_button.png"
 BUTTON_READY = "ready_button.png"
-if not (os.path.exists(".\\"+BUTTON_ACCEPT) and os.path.exists(".\\"+BUTTON_READY)):
+BUTTON_CONTINUE = "continue_button.png"
+if not (os.path.exists(".\\"+BUTTON_ACCEPT) and os.path.exists(".\\"+BUTTON_READY) and os.path.exists(".\\"+BUTTON_CONTINUE)):
     print('Missing image file(s)!!!')
     exit()
 
@@ -18,6 +19,10 @@ isfound_accept = None
 width_rdy, height_rdy = pyautogui.size()
 center_rdy = pyautogui.center((-180, 120, width_rdy, height_rdy))
 isfound_ready = None
+
+width_con, height_con = pyautogui.size()
+center_con = pyautogui.center((0, 505, width_rdy, height_rdy))
+isfound_continue = None
 
 print ('Waiting to accept')
 while True:
@@ -31,4 +36,9 @@ while True:
         print ('Found ready button')
         pyautogui.click(center_rdy)
         sleep(5)
+    isfound_continue = pyautogui.locateOnScreen(BUTTON_CONTINUE, grayscale=False, confidence=0.9)
+    if isfound_continue:
+        print ('Found continue button')
+        pyautogui.click(center_con)
+        sleep(5)      
     sleep(1)
